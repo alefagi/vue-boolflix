@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="layover">
-      <img :src="`${posterUri}${posterPath}`" :alt="titolo">
+      <img v-if="posterPath" :src="`${posterUri}${posterPath}`" :alt="titolo">
     </div>
     <ul>
       <li><span>Titolo: </span>{{ titolo }}</li>
@@ -17,6 +17,7 @@
       </li>
       <li><span>Overview: </span>{{ overview }}</li>
     </ul>
+    <img class="not-found" v-if="!posterPath" src="@/assets/images/no-image.jpg" alt="no-image">  
   </div>
 </template>
 
@@ -64,7 +65,8 @@ export default {
   width: 342px;
   height: 513px;
   position: relative;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
+  margin-right: 40px;
 }
 
 .lang {
@@ -87,6 +89,11 @@ ul {
 
 span {
   font-weight: bold;
+}
+
+.not-found {
+  padding-top: 20px;
+  width: 50%;
 }
 
 </style>
