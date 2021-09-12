@@ -1,7 +1,9 @@
 <template>
   <section id="series">
     <h2>TV Series</h2>
-    <Card v-for="(serie, id) in series" :key="id" :titolo="serie.name" :titoloOriginale="serie.original_name" :lingua="serie.original_language" :voto="serie.vote_average" />
+    <div class="flex">
+      <Card v-for="(serie, id) in series" :key="id" :titolo="serie.name" :titoloOriginale="serie.original_name" :lingua="serie.original_language" :voto="serie.vote_average" :posterPath="serie.poster_path"/>
+    </div>
   </section>
 </template>
 
