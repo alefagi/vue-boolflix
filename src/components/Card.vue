@@ -1,23 +1,25 @@
 <template>
   <div class="card">
-    <div class="layover">
+    <div class="card-layover">
       <img v-if="posterPath" :src="`${posterUri}${posterPath}`" :alt="titolo">
     </div>
-    <ul>
-      <li><span>Titolo: </span>{{ titolo }}</li>
-      <li><span>Titolo Originale: </span>{{ titoloOriginale }} </li>
-      <li><span>Lingua: </span>
-        <img class="lang" v-if="!imgNotFound" :src="getLanguageFlag(lingua)" :alt="lingua">
-        <span v-else>{{ lingua }}</span>
-      </li>
-      <li>
-        <span>Voto: </span>
-        <i v-for="n in voteToInteger" :key="n" class="fas fa-star"></i>
-        <i v-for="n in 5-voteToInteger" :key="n" class="far fa-star"></i>
-      </li>
-      <li><span>Overview: </span>{{ overview }}</li>
-    </ul>
-    <img class="not-found" v-if="!posterPath" src="@/assets/images/no-image.jpg" alt="no-image">  
+    <div class="card-text">
+      <ul>
+        <li><span>Titolo: </span>{{ titolo }}</li>
+        <li><span>Titolo Originale: </span>{{ titoloOriginale }} </li>
+        <li><span>Lingua: </span>
+          <img class="lang" v-if="!imgNotFound" :src="getLanguageFlag(lingua)" :alt="lingua">
+          <span v-else>{{ lingua }}</span>
+        </li>
+        <li>
+          <span>Voto: </span>
+          <i v-for="n in voteToInteger" :key="n" class="fas fa-star"></i>
+          <i v-for="n in 5-voteToInteger" :key="n" class="far fa-star"></i>
+        </li>
+        <li><span>Overview: </span>{{ overview }}</li>
+      </ul>
+      <img class="not-found" v-if="!posterPath" src="@/assets/images/no-image.jpg" alt="no-image">  
+    </div>
   </div>
 </template>
 
@@ -61,39 +63,4 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.card {
-  width: 342px;
-  height: 513px;
-  position: relative;
-  margin-bottom: 40px;
-  margin-right: 40px;
-}
-
-.lang {
-  width: 30px;
-}
-
-ul {
-  list-style-type: none;
-}
-
-.layover {
-  position: absolute;
-  height: 100%;
-  z-index: 1;
-}
-
-.card:hover .layover {
-  visibility: hidden;
-}
-
-span {
-  font-weight: bold;
-}
-
-.not-found {
-  padding-top: 20px;
-  width: 50%;
-}
-
 </style>

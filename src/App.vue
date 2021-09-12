@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <header>
-      <div class="container flex-center">
+      <div class="container flex-between">
         <h1>BOOLFLIX</h1>
         <Search @search="getArray"/>
       </div>
@@ -63,17 +63,4 @@ export default {
 
 <style lang="scss">
 @import "./assets/scss/style.scss";
-
-header {
-  background-color: #000;
-  height: 100px;
-  h1 {
-    color: red;
-  }
-};
-
-main {
-  background-color: grey;
-  min-height: calc(100vh - 100px);
-}
 </style>

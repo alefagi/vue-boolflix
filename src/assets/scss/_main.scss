@@ -1,0 +1,43 @@
+main {
+  background-color: grey;
+  min-height: calc(100vh - 100px);
+  h2 {
+    padding: 20px 0;
+    font-size: 2rem;
+  }
+}
+
+// card
+.card {
+  width: 342px;
+  height: 513px;
+  position: relative;
+  margin-bottom: 40px;
+  margin-right: 40px;
+  .card-layover {
+    position: absolute;
+    height: 100%;
+    z-index: 1;
+  }
+  &:hover .card-layover {
+    visibility: hidden;
+  }
+}
+
+.card-text {
+  height: 100%;
+  overflow-y: auto;
+  ul {
+    list-style-type: none;
+  }
+  span {
+    font-weight: bold;
+  }
+  .lang {
+    width: 30px;
+  }
+  .not-found {
+    padding-top: 20px;
+    width: 50%;
+  }
+}
