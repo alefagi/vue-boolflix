@@ -2,7 +2,7 @@
   <section id="movies">
     <h2>Movies</h2>
     <div class="flex">
-      <Card v-for="(movie, id) in movies" :key="id" :titolo="movie.title" :titoloOriginale="movie.original_title" :lingua="movie.original_language" :voto="movie.vote_average" :posterPath="movie.poster_path" />
+      <Card v-for="(movie, id) in movies" :key="id" :titolo="movie.title" :titoloOriginale="movie.original_title" :lingua="movie.original_language" :voto="movie.vote_average" :posterPath="movie.poster_path" :overview="movie.overview" />
     </div>
   </section>
 </template>

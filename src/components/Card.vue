@@ -1,17 +1,21 @@
 <template>
   <div class="card">
+    <div class="layover">
+      <img :src="`${posterUri}${posterPath}`" :alt="titolo">
+    </div>
     <ul>
-      <li>Titolo: {{ titolo }}</li>
-      <li>Titolo Originale: {{ titoloOriginale }} </li>
-      <li>Lingua: 
-        <img v-if="!imgNotFound" :src="getLanguageFlag(lingua)" :alt="lingua">
+      <li><span>Titolo: </span>{{ titolo }}</li>
+      <li><span>Titolo Originale: </span>{{ titoloOriginale }} </li>
+      <li><span>Lingua: </span>
+        <img class="lang" v-if="!imgNotFound" :src="getLanguageFlag(lingua)" :alt="lingua">
         <span v-else>{{ lingua }}</span>
       </li>
-      <li>Voto: 
+      <li>
+        <span>Voto: </span>
         <i v-for="n in voteToInteger" :key="n" class="fas fa-star"></i>
         <i v-for="n in 5-voteToInteger" :key="n" class="far fa-star"></i>
       </li>
-      <li><img :src="`${posterUri}${posterPath}`" :alt="titolo"></li>
+      <li><span>Overview: </span>{{ overview }}</li>
     </ul>
   </div>
 </template>
@@ -25,6 +29,7 @@ export default {
     lingua: String,
     voto: Number,
     posterPath: String,
+    overview: String,
   },
   data() {
     return {
@@ -55,13 +60,33 @@ export default {
 </script>
 
 <style scoped lang="scss">
-img {
+.card {
+  width: 342px;
+  height: 513px;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.lang {
   width: 30px;
 }
 
-.card {
-  width: 300px;
-  height: 200px;
+ul {
+  list-style-type: none;
+}
+
+.layover {
+  position: absolute;
+  height: 100%;
+  z-index: 1;
+}
+
+.card:hover .layover {
+  visibility: hidden;
+}
+
+span {
+  font-weight: bold;
 }
 
 </style>

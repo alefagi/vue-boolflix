@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <header>
-      <div class="container flex-between">
+      <div class="container flex-center">
         <h1>BOOLFLIX</h1>
         <Search @search="getArray"/>
       </div>
