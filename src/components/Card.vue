@@ -7,7 +7,10 @@
         <img v-if="!imgNotFound" :src="getLanguageFlag(lingua)" :alt="lingua">
         <span v-else>{{ lingua }}</span>
       </li>
-      <li>Voto: {{ voteToInteger }}</li>
+      <li>Voto: 
+        <i v-for="n in voteToInteger" :key="n" class="fas fa-star"></i>
+        <i v-for="n in 5-voteToInteger" :key="n" class="far fa-star"></i>
+      </li>
       <li><img :src="`${posterUri}${posterPath}`" :alt="titolo"></li>
     </ul>
   </div>
