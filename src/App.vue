@@ -49,19 +49,28 @@ export default {
       axios
         .get(`${this.baseUri}/search/movie?api_key=${this.apiKey}&query=${this.searchedText}&language=it-IT`)
         .then((res) => {
-          this.movies = res.data.results;
-          // getCast
-          this.movies.forEach((movie) => {
+          this.tempMovies = res.data.results;
+          // getDetails
+          this.tempMovies.forEach((movie) => {
             axios
               .get(`${this.baseUri}/movie/${movie.id}?api_key=${this.apiKey}&append_to_response=credits`)
               .then((res) => {
+                //getCast
                 const movieCast = res.data.credits.cast.splice(0, 5);
                 let castName = [];
                 movieCast.forEach((actor) => {
                   castName.push(actor.name);
                   movie.castName = castName.join(', ');
                 });
+                //getGenre
+                const movieGenre = res.data.genres;
+                let genreName = [];
+                movieGenre.forEach((genre) => {
+                  genreName.push(genre.name);
+                  movie.genreName = genreName.join(', ');
+                });
               })
+            setTimeout(() => { this.movies = this.tempMovies }, 500);
           });
         });
     },
@@ -69,19 +78,28 @@ export default {
       axios
         .get(`${this.baseUri}/search/tv?api_key=${this.apiKey}&query=${this.searchedText}&language=it-IT`)
         .then((res) => {
-          this.series = res.data.results;
-          // getCast
-          this.series.forEach((serie) => {
+          this.tempSeries = res.data.results;
+          // getDetails
+          this.tempSeries.forEach((serie) => {
             axios
               .get(`${this.baseUri}/tv/${serie.id}?api_key=${this.apiKey}&append_to_response=credits`)
               .then((res) => {
+                //getCast
                 const serieCast = res.data.credits.cast.splice(0, 5);
                 let castName = [];
                 serieCast.forEach((actor) => {
                   castName.push(actor.name);
                   serie.castName = castName.join(', ');
-                })
+                });
+                //getGenre
+                const serieGenre = res.data.genres;
+                let genreName = [];
+                serieGenre.forEach((genre) => {
+                  genreName.push(genre.name);
+                  serie.genreName = genreName.join(', ');
+                });
               })
+            setTimeout(() => { this.series = this.tempSeries }, 500);
           });
         });
     },

@@ -9,7 +9,8 @@
         :voto="movie.vote_average" 
         :posterPath="movie.poster_path" 
         :overview="movie.overview" 
-        :castName="movie.castName" />
+        :castName="movie.castName" 
+        :genreName="movie.genreName"/>
     </div>
   </section>
 </template>

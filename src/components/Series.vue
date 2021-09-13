@@ -9,7 +9,8 @@
         :voto="serie.vote_average" 
         :posterPath="serie.poster_path" 
         :overview="serie.overview" 
-        :castName="serie.castName"/>
+        :castName="serie.castName"
+        :genreName="serie.genreName" />
     </div>
   </section>
 </template>

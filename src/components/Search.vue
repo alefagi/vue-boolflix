@@ -1,7 +1,7 @@
 <template>
   <div class="search">
     <input type="text" v-model.trim="searchedText">
-    <button @click="$emit('search', searchedText)">Search</button>
+    <button @click="search">Search</button>
   </div>
 </template>
 
@@ -11,6 +11,12 @@ export default {
   data() {
     return {
       searchedText: '',
+    }
+  },
+  methods: {
+    search() {
+      this.$emit('search', this.searchedText);
+      this.searchedText = '';
     }
   }
 }

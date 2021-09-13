@@ -17,6 +17,7 @@
           <i v-for="n in 5" :key="n" :class="n <= voteToInteger ? 'fas':'far'" class="fa-star"></i>
         </li>
         <li><span>Overview: </span>{{ overview }}</li>
+        <li><span>Genere: </span>{{ genreName }}</li>
         <li><span>Attori: </span>{{ castName }}</li>
       </ul>
     </div>
@@ -34,6 +35,7 @@ export default {
     posterPath: String,
     overview: String,
     castName: String,
+    genreName: String,
   },
   data() {
     return {
