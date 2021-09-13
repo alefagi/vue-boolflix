@@ -1,6 +1,6 @@
 <template>
   <div class="search">
-    <input type="text" v-model="searchedText">
+    <input type="text" v-model.trim="searchedText">
     <button @click="$emit('search', searchedText)">Search</button>
   </div>
 </template>

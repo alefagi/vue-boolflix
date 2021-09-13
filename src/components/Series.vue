@@ -2,7 +2,14 @@
   <section id="series">
     <h2>TV Series</h2>
     <div class="flex">
-      <Card v-for="(serie, id) in series" :key="id" :titolo="serie.name" :titoloOriginale="serie.original_name" :lingua="serie.original_language" :voto="serie.vote_average" :posterPath="serie.poster_path" :overview="serie.overview"/>
+      <Card v-for="serie in series" :key="serie.id" 
+        :titolo="serie.name" 
+        :titoloOriginale="serie.original_name" 
+        :lingua="serie.original_language" 
+        :voto="serie.vote_average" 
+        :posterPath="serie.poster_path" 
+        :overview="serie.overview" 
+        :castName="serie.castName"/>
     </div>
   </section>
 </template>
@@ -17,7 +24,6 @@ export default {
   },
   props: {
     series: Array,
-    serieCast: Array,
   },
 }
 </script>

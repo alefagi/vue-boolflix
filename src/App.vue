@@ -8,8 +8,8 @@
     </header>
     <main> 
       <div class="container">
-        <Movies :movies="movies" :movieCast="movieCast" />
-        <Series :series="series" :serieCast="serieCast" />
+        <Movies :movies="movies" />
+        <Series :series="series" />
       </div>
     </main>
   </div>
@@ -35,15 +35,15 @@ export default {
       searchedText: '',
       movies: [],
       series: [],
-      movieCast: [],
-      serieCast: [],
     }
   },
   methods: {
     getArray(text) {
-      this.searchedText = text;
-      this.getMovies();
-      this.getSeries();
+      if (text.length) {
+        this.searchedText = text;
+        this.getMovies();
+        this.getSeries();
+      }
     },
     getMovies() {
       axios
@@ -55,10 +55,14 @@ export default {
             axios
               .get(`${this.baseUri}/movie/${movie.id}?api_key=${this.apiKey}&append_to_response=credits`)
               .then((res) => {
-                this.movieCast = res.data.credits.cast;
-                this.movieCast.splice(5);
-              });
-          })
+                const movieCast = res.data.credits.cast.splice(0, 5);
+                let castName = [];
+                movieCast.forEach((actor) => {
+                  castName.push(actor.name);
+                  movie.castName = castName.join(', ');
+                });
+              })
+          });
         });
     },
     getSeries() {
@@ -71,10 +75,14 @@ export default {
             axios
               .get(`${this.baseUri}/tv/${serie.id}?api_key=${this.apiKey}&append_to_response=credits`)
               .then((res) => {
-                this.serieCast = res.data.credits.cast;
-                this.serieCast.splice(5);
-              });
-          })
+                const serieCast = res.data.credits.cast.splice(0, 5);
+                let castName = [];
+                serieCast.forEach((actor) => {
+                  castName.push(actor.name);
+                  serie.castName = castName.join(', ');
+                })
+              })
+          });
         });
     },
   },

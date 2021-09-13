@@ -2,6 +2,7 @@
   <div class="card">
     <div class="card-layover">
       <img v-if="posterPath" :src="`${posterUri}${posterPath}`" :alt="titolo">
+      <img v-else class="not-found" src="@/assets/images/no-image.jpg" alt="no-image">
     </div>
     <div class="card-text">
       <ul>
@@ -13,13 +14,11 @@
         </li>
         <li>
           <span>Voto: </span>
-          <i v-for="n in voteToInteger" :key="n" class="fas fa-star"></i>
-          <i v-for="n in 5-voteToInteger" :key="n" class="far fa-star"></i>
+          <i v-for="n in 5" :key="n" :class="n <= voteToInteger ? 'fas':'far'" class="fa-star"></i>
         </li>
         <li><span>Overview: </span>{{ overview }}</li>
-        <!-- <li><span>Attori: </span>{{ castName }}</li> -->
+        <li><span>Attori: </span>{{ castName }}</li>
       </ul>
-      <img class="not-found" v-if="!posterPath" src="@/assets/images/no-image.jpg" alt="no-image">  
     </div>
   </div>
 </template>

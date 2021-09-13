@@ -2,7 +2,14 @@
   <section id="movies">
     <h2>Movies</h2>
     <div class="flex">
-      <Card v-for="(movie, id) in movies" :key="id" :titolo="movie.title" :titoloOriginale="movie.original_title" :lingua="movie.original_language" :voto="movie.vote_average" :posterPath="movie.poster_path" :overview="movie.overview" :castName="movieCast[0].name"/>
+      <Card v-for="movie in movies" :key="movie.id"
+        :titolo="movie.title" 
+        :titoloOriginale="movie.original_title"
+        :lingua="movie.original_language"
+        :voto="movie.vote_average" 
+        :posterPath="movie.poster_path" 
+        :overview="movie.overview" 
+        :castName="movie.castName" />
     </div>
   </section>
 </template>
@@ -17,7 +24,6 @@ export default {
   },
   props: {
     movies: Array,
-    movieCast: Array,
   },
 }
 </script>

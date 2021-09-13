@@ -18,9 +18,14 @@ main {
     position: absolute;
     height: 100%;
     z-index: 1;
+    transition: opacity 0.5s;
   }
   &:hover .card-layover {
-    visibility: hidden;
+    opacity: 0;
+  }
+  .not-found {
+    height: 100%;
+    width: 100%;
   }
 }
 
@@ -35,9 +40,5 @@ main {
   }
   .lang {
     width: 30px;
-  }
-  .not-found {
-    padding-top: 20px;
-    width: 50%;
   }
 }
