@@ -17,6 +17,7 @@
           <i v-for="n in 5-voteToInteger" :key="n" class="far fa-star"></i>
         </li>
         <li><span>Overview: </span>{{ overview }}</li>
+        <!-- <li><span>Attori: </span>{{ castName }}</li> -->
       </ul>
       <img class="not-found" v-if="!posterPath" src="@/assets/images/no-image.jpg" alt="no-image">  
     </div>
@@ -33,6 +34,7 @@ export default {
     voto: Number,
     posterPath: String,
     overview: String,
+    castName: String,
   },
   data() {
     return {

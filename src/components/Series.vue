@@ -17,6 +17,7 @@ export default {
   },
   props: {
     series: Array,
+    serieCast: Array,
   },
 }
 </script>
