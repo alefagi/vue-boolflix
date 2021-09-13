@@ -1,6 +1,6 @@
 <template>
   <div class="search">
-    <input type="text" v-model.trim="searchedText">
+    <input type="text" v-model.trim="searchedText" @keyup.enter="search">
     <button @click="search">Search</button>
   </div>
 </template>

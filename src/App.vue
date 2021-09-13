@@ -41,65 +41,63 @@ export default {
     getArray(text) {
       if (text.length) {
         this.searchedText = text;
-        this.getMovies();
-        this.getSeries();
+        this.getMovies('/search/movie', '/movie/');
+        this.getSeries('/search/tv', '/tv/');
       }
     },
-    getMovies() {
+    getCast(item, cast) {
+      let castName = [];
+      cast.forEach((actor) => {
+        castName.push(actor.name);
+        item.castName = castName.join(', ');
+      });
+    },
+    getGenre(item, genre) {
+      let genreName = [];
+      genre.forEach((genre) => {
+        genreName.push(genre.name);
+        item.genreName = genreName.join(', ');
+      });
+    },
+    getMovies(searchEP, creditsEP) {
       axios
-        .get(`${this.baseUri}/search/movie?api_key=${this.apiKey}&query=${this.searchedText}&language=it-IT`)
+        .get(`${this.baseUri}${searchEP}?api_key=${this.apiKey}&query=${this.searchedText}&language=it-IT`)
         .then((res) => {
-          this.tempMovies = res.data.results;
+          const temp = res.data.results;
           // getDetails
-          this.tempMovies.forEach((movie) => {
+          temp.forEach((item) => {
             axios
-              .get(`${this.baseUri}/movie/${movie.id}?api_key=${this.apiKey}&append_to_response=credits`)
+              .get(`${this.baseUri}${creditsEP}${item.id}?api_key=${this.apiKey}&append_to_response=credits`)
               .then((res) => {
                 //getCast
-                const movieCast = res.data.credits.cast.splice(0, 5);
-                let castName = [];
-                movieCast.forEach((actor) => {
-                  castName.push(actor.name);
-                  movie.castName = castName.join(', ');
-                });
+                const cast = res.data.credits.cast.splice(0, 5);
+                this.getCast(item, cast);
                 //getGenre
-                const movieGenre = res.data.genres;
-                let genreName = [];
-                movieGenre.forEach((genre) => {
-                  genreName.push(genre.name);
-                  movie.genreName = genreName.join(', ');
-                });
+                const genre = res.data.genres;
+                this.getGenre(item, genre);
               })
-            setTimeout(() => { this.movies = this.tempMovies }, 500);
+            setTimeout(() => { this.movies = temp }, 500);
           });
         });
     },
-    getSeries() {
+    getSeries(searchEP, creditsEP) {
       axios
-        .get(`${this.baseUri}/search/tv?api_key=${this.apiKey}&query=${this.searchedText}&language=it-IT`)
+        .get(`${this.baseUri}${searchEP}?api_key=${this.apiKey}&query=${this.searchedText}&language=it-IT`)
         .then((res) => {
-          this.tempSeries = res.data.results;
+          const temp = res.data.results;
           // getDetails
-          this.tempSeries.forEach((serie) => {
+          temp.forEach((item) => {
             axios
-              .get(`${this.baseUri}/tv/${serie.id}?api_key=${this.apiKey}&append_to_response=credits`)
+              .get(`${this.baseUri}${creditsEP}${item.id}?api_key=${this.apiKey}&append_to_response=credits`)
               .then((res) => {
                 //getCast
-                const serieCast = res.data.credits.cast.splice(0, 5);
-                let castName = [];
-                serieCast.forEach((actor) => {
-                  castName.push(actor.name);
-                  serie.castName = castName.join(', ');
-                });
+                const cast = res.data.credits.cast.splice(0, 5);
+                this.getCast(item, cast);
                 //getGenre
-                const serieGenre = res.data.genres;
-                let genreName = [];
-                serieGenre.forEach((genre) => {
-                  genreName.push(genre.name);
-                  serie.genreName = genreName.join(', ');
-                });
+                const genre = res.data.genres;
+                this.getGenre(item, genre);
               })
-            setTimeout(() => { this.series = this.tempSeries }, 500);
+            setTimeout(() => { this.series = temp }, 500);
           });
         });
     },

@@ -30,13 +30,17 @@ main {
 }
 
 .card-text {
+  padding: 10px;
   height: 90%;
   overflow-y: auto;
   ul {
     list-style-type: none;
-  }
-  span {
-    font-weight: bold;
+    li {
+      padding: 3px;
+      span {
+        font-weight: bold;
+      }
+    }
   }
   .lang {
     width: 30px;
