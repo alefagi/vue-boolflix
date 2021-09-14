@@ -41,65 +41,23 @@ export default {
     getArray(text) {
       if (text.length) {
         this.searchedText = text;
-        this.getMovies('/search/movie', '/movie/');
-        this.getSeries('/search/tv', '/tv/');
+        this.getSeries();
+        this.getMovies();
       }
     },
-    getCast(item, cast) {
-      let castName = [];
-      cast.forEach((actor) => {
-        castName.push(actor.name);
-        item.castName = castName.join(', ');
-      });
-    },
-    getGenre(item, genre) {
-      let genreName = [];
-      genre.forEach((genre) => {
-        genreName.push(genre.name);
-        item.genreName = genreName.join(', ');
-      });
-    },
-    getMovies(searchEP, creditsEP) {
+    getMovies() {
       axios
-        .get(`${this.baseUri}${searchEP}?api_key=${this.apiKey}&query=${this.searchedText}&language=it-IT`)
+        .get(`${this.baseUri}/search/movie?api_key=${this.apiKey}&query=${this.searchedText}&language=it-IT`)
         .then((res) => {
-          const temp = res.data.results;
-          // getDetails
-          temp.forEach((item) => {
-            axios
-              .get(`${this.baseUri}${creditsEP}${item.id}?api_key=${this.apiKey}&append_to_response=credits`)
-              .then((res) => {
-                //getCast
-                const cast = res.data.credits.cast.splice(0, 5);
-                this.getCast(item, cast);
-                //getGenre
-                const genre = res.data.genres;
-                this.getGenre(item, genre);
-              })
-            setTimeout(() => { this.movies = temp }, 500);
-          });
-        });
+          this.movies = res.data.results;
+        })
     },
-    getSeries(searchEP, creditsEP) {
+    getSeries() {
       axios
-        .get(`${this.baseUri}${searchEP}?api_key=${this.apiKey}&query=${this.searchedText}&language=it-IT`)
+        .get(`${this.baseUri}/search/tv?api_key=${this.apiKey}&query=${this.searchedText}&language=it-IT`)
         .then((res) => {
-          const temp = res.data.results;
-          // getDetails
-          temp.forEach((item) => {
-            axios
-              .get(`${this.baseUri}${creditsEP}${item.id}?api_key=${this.apiKey}&append_to_response=credits`)
-              .then((res) => {
-                //getCast
-                const cast = res.data.credits.cast.splice(0, 5);
-                this.getCast(item, cast);
-                //getGenre
-                const genre = res.data.genres;
-                this.getGenre(item, genre);
-              })
-            setTimeout(() => { this.series = temp }, 500);
-          });
-        });
+          this.series = res.data.results;
+        })      
     },
   },
 }

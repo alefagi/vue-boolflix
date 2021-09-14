@@ -3,14 +3,14 @@
     <h2>Movies</h2>
     <div class="flex">
       <Card v-for="movie in movies" :key="movie.id"
+        kind="movie"
+        :id="movie.id"
         :titolo="movie.title" 
         :titoloOriginale="movie.original_title"
         :lingua="movie.original_language"
         :voto="movie.vote_average" 
         :posterPath="movie.poster_path" 
-        :overview="movie.overview" 
-        :castName="movie.castName" 
-        :genreName="movie.genreName"/>
+        :overview="movie.overview" />
     </div>
   </section>
 </template>

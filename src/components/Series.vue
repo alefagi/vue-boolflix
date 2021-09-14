@@ -3,14 +3,14 @@
     <h2>TV Series</h2>
     <div class="flex">
       <Card v-for="serie in series" :key="serie.id" 
+        kind="serie"
+        :id="serie.id"
         :titolo="serie.name" 
         :titoloOriginale="serie.original_name" 
         :lingua="serie.original_language" 
         :voto="serie.vote_average" 
         :posterPath="serie.poster_path" 
-        :overview="serie.overview" 
-        :castName="serie.castName"
-        :genreName="serie.genreName" />
+        :overview="serie.overview" />
     </div>
   </section>
 </template>

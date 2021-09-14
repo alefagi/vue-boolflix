@@ -33,12 +33,15 @@ main {
   padding: 10px;
   height: 90%;
   overflow-y: auto;
+  background-color: black;
+  color: lightgray;
   ul {
     list-style-type: none;
     li {
       padding: 3px;
       span {
         font-weight: bold;
+        color: white;
       }
     }
   }
